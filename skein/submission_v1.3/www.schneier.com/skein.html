@@ -1,0 +1,301 @@
+<!DOCTYPE html> 
+<html>
+<head>
+
+	
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1"/>
+
+	<link rel="STYLESHEET" type="text/css" href="https://www.schneier.com/blog/main.css">
+	<link rel="alternate" type="application/atom+xml" title="Blog Feed (Atom 1.0)" href="https://www.schneier.com/blog/atom.xml">
+
+
+
+
+	<title>Schneier on Security: The Skein Hash Function Family</title>
+
+	<link rel="STYLESHEET" type="text/css" href="https://www.schneier.com/blog/legacy.css">
+
+</head>
+<body><div id="wrapper"><div id="main">
+	<header><div id="header">
+	<h1>Schneier on Security</h1>
+	</div></header>
+	<nav><div class="nav" id="header-nav">
+<ul>
+    <li class="menu1"><a href="https://www.schneier.com/">Blog</a></li>
+		<li class="menu2"><a href="https://www.schneier.com/crypto-gram.html">Newsletter</a></li>
+		<li class="menu3"><a href="https://www.schneier.com/books.html">Books</a></li>
+		<li class="menu4"><a href="https://www.schneier.com/essays/">Essays</a></li>
+		<li class="menu5"><a href="https://www.schneier.com/news.html">News</a></li>
+		
+		<li class="menu6"><a href="https://www.schneier.com/schedule.html">Schedule</a></li>
+		<li class="menu7 current"><a href="https://www.schneier.com/cryptography.html">Crypto</a></li>
+		
+		<li class="menu8"><a href="https://www.schneier.com/about.html">About Me</a></li>
+			
+	</ul>
+	</div></nav>
+
+<aside><div class="sidebar" id="sidebar-one">
+
+		<section><div class="sidesection" id="search-widget">
+		<h3>Search</h3>
+		<p class="small"><em>Powered by <a href="https://duckduckgo.com/">DuckDuckGo</a></em></p>
+		<form method="get" action="https://duckduckgo.com/">
+		<input type="hidden" name="kh" value="1"><!-- use https -->
+		<input id="search" name="q" size="15" maxlength="255">
+		<input type="submit" value="Go"><br>
+		<input type="radio" name="sites" id="searchblog" value="www.schneier.com/blog" ><label for="searchblog">blog</label> <input type="radio" name="sites" id="searchessays" value="www.schneier.com/essay" ><label for="searchessays">essays</label>
+		<input type="radio" name="sites" id="searchall" value="www.schneier.com" checked><label for="searchall">whole site</label>
+		</form>
+		</div></section>
+	
+		<section><div class="sidesection">
+		<h3>Subscribe</h3>
+		
+			<div id="subscription-buttons">
+				<a href="https://www.schneier.com/blog/atom.xml"><img alt="Atom Feed" src="https://www.schneier.com/images/rss-32px.png"></a>
+				<a href="https://www.facebook.com/bruce.schneier"><img alt="Facebook" src="https://www.schneier.com/images/facebook-32px.png"></a>
+				<a href="http://twitter.com/schneierblog/"><img alt="Twitter" src="https://www.schneier.com/images/twitter-32px.png"></a>
+				<a href="http://www.amazon.com/Schneier-on-Security/dp/B0053HDDWW/"><img alt="Kindle" src="https://www.schneier.com/images/kindle-32px.png"></a>
+				<a href="/crypto-gram-sub.html"><img alt="E-Mail Newsletter (Crypto-Gram)" src="https://www.schneier.com/images/email-32px.png"></a>
+			</div><!--#subscription-buttons-->
+		</div></section>
+
+	</div></aside>
+
+	
+	<div id="content">
+    
+<!-- begin page content -->
+
+<h2>The Skein Hash Function Family</h2>
+
+<p><b>By Niels Ferguson&nbsp;- Stefan Lucks&nbsp;- Bruce Schneier&nbsp;- Doug Whiting&nbsp;- Mihir Bellare&nbsp;- Tadayoshi Kohno&nbsp;- Jon Callas&nbsp;- Jesse Walker</b>
+
+<p><i>Submitted to NIST for their <a href="http://csrc.nist.gov/groups/ST/hash/sha-3/index.html">cryptographic hash algorithm competition</a>.</i>
+
+<div class="inlinecap">
+<p><a href="skein-team.html"><img width="200" height="133" alt="Skein Team" src="images/skein-team-200w.jpg"></a>
+
+<br><a href="skein-team.html">The Skein team</a> (l to r): Mihir, Jesse, Jon, Doug, Stefan, Niels, Bruce, Yoshi.
+</div>
+
+<p>Skein is a new family of cryptographic hash functions.  Its design combines speed, security, simplicity, and a great deal of flexibility in a modular package that is easy to analyze.
+
+<p><a href="http://www.skein-hash.info/">Skein Hash Function Family website</a>
+
+<p>Skein is fast.  Skein-512&mdash;our primary proposal&mdash;hashes data at 6.1 clock cycles per byte on a 64-bit CPU.  This means that on a 3.1 GHz x64 Core 2 Duo CPU, Skein hashes data at 500 MBytes/second per core&mdash;almost twice as fast as SHA-512 and three times faster than SHA-256.  An optional hash-tree mode speeds up parallelizable implementations even more.  Skein is fast for short messages, too; Skein-512 hashes short messages in about 1000 clock cycles.
+
+<p>Skein is secure.  Its conservative design is based on the <a href="threefish.html">Threefish</a> block cipher.  Our current best attack on Threefish-512 is on 25 of 72 rounds, for a safety factor of 2.9. For comparison, at a similar stage in the standardization process, the AES encryption algorithm had an attack on 6 of 10 rounds, for a safety factor of only 1.7.  Additionally, Skein has a number of provably secure properties, greatly increasing confidence in the algorithm.
+
+<p>Skein is simple.  Using only three primitive operations, the Skein compression function can be easily understood and remembered.  The rest of the algorithm is a straightforward iteration of this function.
+
+<p>Skein is flexible.  Skein is defined for three different internal state sizes&mdash;256 bits, 512 bits, and 1024 bits&mdash;and any output size.  This allows Skein to be a drop-in replacement for the entire SHA family of hash functions.  A completely optional and extendable argument system makes Skein an efficient tool to use for a very large number of functions: a PRNG, a stream cipher, a key derivation function, authentication without the overhead of HMAC, and a personalization capability.  All these features can be implemented with very low overhead.  Together with the Threefish large-block cipher at Skein's core, this design provides a full set of symmetric cryptographic primitives suitable for most modern applications.
+
+<p>Skein is efficient on a variety of platforms, both hardware and software.  Skein-512 can be implemented in about 200 bytes of state.  Small devices, such as 8-bit smart cards, can implement Skein-256 using about 100 bytes of memory.  Larger devices can implement the larger versions of Skein to achieve faster speeds.
+
+<p>Skein was designed by a team of highly experienced cryptographic experts from academia and industry, with expertise in cryptography, security analysis, software, chip design, and implementation of real-world cryptographic systems.  This breadth of knowledge allowed them to create a balanced design that works well in all environments.
+
+<h3>Downloads</h3>
+
+<p><a href="skein.pdf">Skein Paper, Version 1.3, 1 Oct 2010</a> (includes description of Threefish)
+<br><a href="skein-1.3-modifications.pdf">NIST Round 3 Tweak Description, 25 Oct 2010</a> 
+<br><a href="skein-proofs.pdf">Skein Proofs of Security, Version 1.0, 29 Apr 2009</a>
+<br><a href="code/skein.zip">Source code and test vectors for Skein and Threefish</a> (12 MB)
+
+<h3>Errata</h3> 
+
+<p>Version 1.1 of the paper, reference, and optimized code corrects an error in which the length of the configuration string was passed in as the size of the internal block (256 bits for Skein-256, 512 for Skein-512, and 1024 for Skein-1024), instead of a constant 256 bits for all three sizes.  This error has no cryptographic significance, but affected the test vectors and the initialization values.  Version 1.1 of the code also fixes a bug in the MAC mode key processing.  This bug does not affect the NIST submission in any way.
+
+<p>Version 1.2 of the paper, reference, and optimized code include a &quot;tweak&quot; as permitted by NIST; we revised the rotation constants.  This change does not affect Skein's performance in any way.  All existing and future implementations of Skein <i>must</i> now use these new rotation constants to be compliant.  The revised paper explains why we updated the rotation constants (Appendix D), how the new rotation constants were derived (Section 8.3), and new cryptanalysis  (Sections 9.3.1, 9.3.2, 9.5, 9.6, and 9.7).
+
+<p>Version 1.3 of the paper, reference, and optimized code include a "tweak" as permitted by NIST: the key schedule constant in Threefish. This change does not affect Skein's performance in any measurable way, but it does dramatically decrease the efficiency of the rotational distinguisher "attacks."  While we were not convinced that these distinguishers would have any real-world implications, it was so simple to address  by just changing one constant that we felt it was a prudent step to take.  The revised paper explains why we updated the key-schedule constant (Appendix E), and how the new constant was derived (Section 8.3). 
+
+<h3>Usage</h3>
+<p>Skein is optionally used for authentication tags in the <a href="http://tools.ietf.org/html/rfc6189">ZRTP</a> protocol.
+
+<p>Skein is used in the <a href="http://www.minibluebox.com/">MiniBluebox</a> password manager for Mac OS X and iPhone.
+
+<h3>Links</h3>
+
+<p><a href="http://csrc.nist.gov/groups/ST/hash/sha-3/index.html">NIST's SHA-3 website</a>
+<br><a href="http://ehash.iaik.tugraz.at/wiki/The_SHA-3_Zoo">List of SHA-3 submissions</a>
+
+<p><a href="http://www.xs4all.nl/~warper/">Java implementation of Skein by Maarten Bodewes</a>
+<br><a href="http://www.h2database.com/skein/index.html">Java and Javascript implementations of Skein by Thomas Mueller</a>
+<br><a href="http://corp.galois.com/blog/2009/1/23/a-cryptol-implementation-of-skein.html">Cryptol implementation of Skein</a>
+<br><a href="http://code.google.com/p/skeinfish/">C# implementation of Skein and Threefish by Alberto Fajardo</a>
+<br><a href="http://sriramk.com/nskein-skein-implementation-net">.NET implementation of Skein by Sriram Krishnan</a>
+<br><a href="https://sites.google.com/site/bartoszmalkowski/threefish">Threefish test vectors and Java implementation by Bartosz Malkowski</a>
+<br><a href="http://www.syntax-k.de/projekte/fhreefish/">AVR 8-bit implementation of Threefish and Skein by Jörg Walter</a>
+<br><a href="http://skeinlibmanaged.codeplex.com/">Managed C# implementation of Skein and ThreeFish (SkeinLibManaged)</a>
+<br><a href="https://github.com/wernerd/Skein3Fish">Skein and Threefish functions for Java, C, and Go (Skein3Fish)</a>
+<br><a href="http://sourceforge.net/p/skeinbash/code/ci/ed9a27d0096e55408d7a529f81dce8ba60866180/tree/skein?force=True">Skein-Bash</a> by Matt Tomasello
+<br><a href="http://search.cpan.org/~radek/Digest-Skein-0.05/lib/Digest/Skein.pm">Perl implementation of Skein by Radoslaw Zielinski (Digest::Skein)</a>
+<br><a href="http://www.coderslagoon.com/#skeinr">Ruby implementation of Skein by Markus Hahn</a>
+
+<p><a href="skein_fpga.pdf">Implementing Skein Hash Function on Xilinx Virtex-5 FPGA Platform</a> by Men Long
+
+<p><a href="skein-20101206.pdf">Cryptanalysis of Skein</a> by Daniel J. Bernstein and Tanja Lange.  Submitted to the <a href="http://www.anagram.com/jcrap/">Journal of Craptology</a>.
+<!-- end page content -->
+    
+<p id="powered">Photo of Bruce Schneier by Per Ervland.
+	
+	<p id="disclaim">Schneier on Security is a personal website.  Opinions expressed are not necessarily those of <a href="https://www.co3sys.com/">Co3 Systems, Inc.</a>.
+
+	
+	</div><!--#content-->
+
+<aside><div class="sidebar" id="sidebar-two">
+		<section><div class="sidesection" id="about">
+		
+		<h3>About Bruce Schneier</h3>
+		<img id="authorphoto" src="https://www.schneier.com/images/bruce-blog3.jpg" width="150" height="194" alt="Bruce Schneier"><p class="small">I've been writing about security issues on my <a href="https://www.schneier.com/">blog</a> since 2004, and in my monthly <a href="https://www.schneier.com/crypto-gram.html">newsletter</a> since 1998. I write <a href="https://www.schneier.com/books.html">books</a>, <a href="https://www.schneier.com/essays/">articles</a>, and <a href="cryptography.html">academic papers</a>. Currently, I'm the Chief Technology Officer of <a href="https://www.co3sys.com/">Co3 Systems</a>, a fellow at Harvard's <a href="http://berkman.harvard.edu/">Berkman Center</a>, and a board member of <a href="https://www.eff.org/">EFF</a>.</p>
+		</div></section>
+
+
+
+	<section><div class="sidesection">
+		<h3>Essays</h3>
+
+
+
+		<h4>Featured Essays</h4>
+		<ul>
+			<li><a href="https://www.schneier.com/essay-472.html">It's Time to Break Up the NSA</a></li>
+			<li><a href="https://www.schneier.com/essay-469.html">How the NSA Threatens National Security</a></li>
+			<li><a href="https://www.schneier.com/essay-258.html">Terrorists May Use Google Earth, but Fear is No Reason to Ban It</a></li>
+			<li><a href="https://www.schneier.com/essay-154.html">In Praise of Security Theater</a></li>
+			<li><a href="https://www.schneier.com/essay-114.html">The Eternal Value of Privacy</a></li>
+			<li><a href="https://www.schneier.com/essay-087.html">Terrorists Don't Do Movie Plots</a></li>
+		</ul>
+		
+		<p><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=essays">more essays</a></p>
+		</div></section>
+
+
+
+
+		<section><div class="sidesection">
+		<h3>Blog Menu</h3>
+		<ul>
+			<li><a href="https://www.schneier.com/blog/calendar.html">Archives by Date</a></li>
+			<li><a href="https://www.schneier.com/blog/newcomments.html">100 Latest Comments</a></li>
+		</ul>
+
+        
+		<h4>Tags</h4>
+<ul class="top-tags">
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=privacy">privacy</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=terrorism">terrorism</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=surveillance">surveillance</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=squid">squid</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=air%20travel">air travel</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=DHS">DHS</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=homeland%20security">homeland security</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=law%20enforcement">law enforcement</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=cryptography">cryptography</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=economics%20of%20security">economics of security</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=academic%20papers">academic papers</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=crime">crime</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=NSA">NSA</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=TSA">TSA</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=Schneier%20news">Schneier news</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=essays">essays</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=hacking">hacking</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=laws">laws</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=computer%20security">computer security</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=national%20security%20policy">national security policy</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=malware">malware</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=encryption">encryption</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=fraud">fraud</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=psychology%20of%20security">psychology of security</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=police">police</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=physical%20security">physical security</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=cost-benefit%20analysis">cost-benefit analysis</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=fear">fear</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=bombs">bombs</a></li>
+
+		<li><a href="https://www.schneier.com/cgi-bin/mt/mt-search.cgi?tag=authentication">authentication</a></li>
+</ul>
+
+<p><a href="/blog/tags.html">more tags</a></p>
+
+	
+		</div></section>
+		
+		<section><div class="sidesection">
+		<h3>Latest Book</h3>
+		<a href="https://www.schneier.com/book-co.html"><img class="sidepic"  alt="Carry On" src="https://www.schneier.com/images/book-co-175w.jpg"></a>
+		<p><a href="https://www.schneier.com/books.html">more books</a></p>
+		</div></section>
+		
+		<section><div class="sidesection">
+		<a href="https://www.eff.org/issues/bloggers/legal/join"><img id="effbutton" src="https://www.schneier.com/images/eff-150x40.gif" ALT="Support Bloggers' Rights!" width="150" height="40"></a>
+		
+		<a href="https://npo.networkforgood.org/Donate/Donate.aspx?npoSubscriptionId=8252"><img src="https://www.schneier.com/images/epic-150w.png" width="150" height="54" alt="Defend Privacy--Support Epic"></a>
+
+		</div></section>
+
+		<section><div class="sidesection">
+		<a href="https://www.co3sys.com/"><img class="sidepic" alt="Co3 Systems" src="https://www.schneier.com/images/co3-logo-175w.jpg"></a>	
+
+		</div></section>
+
+		
+	</div></aside>
+
+<footer><nav><div class="nav" id="footer-nav">
+<ul>
+    <li class="menu1"><a href="https://www.schneier.com/">Blog</a></li>
+		<li class="menu2"><a href="https://www.schneier.com/crypto-gram.html">Newsletter</a></li>
+		<li class="menu3"><a href="https://www.schneier.com/books.html">Books</a></li>
+		<li class="menu4"><a href="https://www.schneier.com/essays/">Essays</a></li>
+		<li class="menu5"><a href="https://www.schneier.com/news.html">News</a></li>
+		
+		<li class="menu6"><a href="https://www.schneier.com/schedule.html">Schedule</a></li>
+		<li class="menu7 current"><a href="https://www.schneier.com/cryptography.html">Crypto</a></li>
+		
+		<li class="menu8"><a href="https://www.schneier.com/about.html">About Me</a></li>
+			
+	</ul>	
+	</div></nav></footer>
+
+</div><!--#main-->
+</div><!--#wrapper-->
+
+</body>
+</html>
+
+

@@ -1,0 +1,117 @@
+.extraspace {padding-top: .75em; margin-top: 1em; }
+P.bottomnav {margin-top: 1.5em; }
+
+IMG { border: none; padding-bottom: 5px; }
+body .sidebar IMG { padding-bottom: 0; }
+IMG.cover { margin: 0 2px 12px 10px; padding: 0; float: right;}
+P.illustration { text-align: center; font-size: 88%; font-weight: bold; padding: 1em 0 1.25em 0}
+HR.separator { width:50%; margin-top: 1em; margin-bottom: .25em; }
+
+TD { margin: 0; border: none; vertical-align: top; margin: 0; border-spacing: 0; border: 0;}
+TR {margin: 0; padding: 0; border-spacing: 0; border: 0;}
+
+/* inline image with caption */
+div.inlinecap { float:right; margin: .5em 0 1em 1.2em; width: 200px; font-size: 86%; font-weight: bold }
+
+/* photo on about me page */
+.brucephoto {padding: 0; margin: 0 5px 15px 15px; float: right; }
+
+/* for main books page */
+DIV.book { float: left; text-align: center; width: 138px; }
+DIV.booktitle { margin: 0; padding: 0; height: 4em; font-size:13px; }
+DIV.book IMG { margin: 10px 5px 5px 5px; padding: 0;}
+
+/* for individual book pages */
+TABLE.bookcolumns { background-color: #FFFFFF; color: #000000; font-size: 100%; border-spacing: 0; border: none; font-size: 100%; }
+P.subtitle { font-weight: bold; margin-top: 0; } 
+P.quote { margin: .25em 0 .5em 0; padding: 0;}
+DIV.quotes { border-top: 1px solid black; border-bottom: 1px solid black; margin: 1.5em 4.2em 1em 4em; }
+DIV.quotes p.attribution { margin-top: .25em; padding-left: 2em; }
+P.attribution { text-align: right; font-style: italic; margin: 0 0 1.5em 0; }
+p.attribution cite { font-style: normal; }
+DIV.quotes p.more { margin: 2.5em 0 .75em 0; padding: 0; text-align: center; }
+IMG.sidebar-cover { padding: 0 0 .5em 0; border: none; margin: auto; }
+TD.maintext-table { padding: 0; }
+TD.sidebar-table { padding: 0 .5em 0 1.25em; width: 30%; font-size: 13px; }
+DIV.book-left {width: 58%; float: left}
+DIV.book-right {width: 38%; float: right; font-size: 13px;}
+TABLE.book H3 .book-left H3, .book-right H3 { font-size: 100%; clear:both; }
+@media only screen 
+and (max-width : 949px) {
+	DIV.book-left {width: 100%; float: none; border-bottom: 1px solid #999; margin-bottom:14px;}
+	DIV.book-right {width: 100%; float: none; font-size: 15px;}
+	IMG.sidebar-cover { display:block; margin: 0 auto; }
+    P.illustration {overflow:auto;}
+}
+
+      
+/* for book table of contents */
+TD.toc-part, TD.toc1, TD.toc2, TD.toc3, TD.toc4 { text-align: left; padding: 0 0 .2em 0;}
+TD.toc-part, TD.part-pn{ font-weight: bold; padding: 1.5em 0 .2em 0; }
+TD.part-pn {text-align: right; font-weight: bold; padding: 1.5em 0 .2em 1em; }
+TR.toc-break TD { padding-top: 1.5em; }
+TR.toc-meta TD { font-style: italic}
+TD.toc2{ padding-left: 2em; }   
+TD.toc3{ padding-left: 4em; }
+TD.toc4{ padding-left: 8em; }
+TD.toc-pn{ text-align: right; vertical-align: top; padding-left: 1em;}
+
+/* for munging e-mail addresses in crypto-gram */
+IMG.nym, IMG.num { margin: 0 1px 0 1px; padding: 0; vertical-align: baseline;}
+
+/* legacy formatting table on, e.g., blowfish page */
+TABLE.legacy { background-color: #FFFFFF; color: #000000; font-size: 100%; border-spacing: 0; border: none; padding: 0; }
+TD.legacycell { padding: 0; width: 50%; }
+TD.legacy-rpad { padding: 0 1em 0 0; width: 50%; } 
+TD.legacy-paypal { padding: 1em 1em 0 0; }
+
+/* legacy news and sandl book reviews page -- rework */
+TH.legacyright {padding: 1.25em 0 0 0; text-align: left; vertical-align: top;}
+TH.legacyrightalign {padding: 1.25em 0 0 0; text-align: right; vertical-align: top;}
+TH.legacyleft { padding: 1.25em 1em 0 0; text-align: left; vertical-align: top;}
+TD.legacyfullwidth { padding: .1em 0 0 0; }
+
+.tablewrapper { width: 100%; overflow: auto; }
+TABLE.datatable { font-size: 100%; border-spacing: 0; margin-bottom: 1em;}
+TABLE.datatable TD, TABLE.datatable TH {padding: 1px 3px;}
+TABLE.bordered { border-top: 1px solid black; border-left: 1px solid black; }
+TABLE.bordered TD, TABLE.bordered TH { padding: 1px 3px; border-bottom: 1px solid black; border-right: 1px solid black; }
+TABLE.centercells TD, TABLE.centercells TH { text-align: center; }
+TABLE.leftfirst TR :first-child { text-align: left; }
+TABLE.leftlast TR :last-child { text-align: left; }              
+TABLE.rightfirst TR :first-child { text-align: right; }
+TABLE.rightlast TR :last-child { text-align: right; }              
+TABLE.book { background-color: #FFFFFF; color: #000000; font-size: 100%; border-spacing: 0; border: none; }
+TH.label {padding: 5px .75em 5px 0; white-space: nowrap; text-align: left; vertical-align: top;}
+TD.data {padding: 5px; border: 0; background-color: #FFFFFF; color: #000000; vertical-align: top;}
+
+/* essay 170 */
+TABLE.shaded { }
+TABLE.shaded CAPTION {margin: 0; background-color: navy; color: white; padding: 5px; font-weight: bold; font-size: 110%; border: solid white 1px}
+TABLE.shaded TH { background-color: lightsteelblue; color: black; padding: 5px; text-align: left; border: solid white 1px}
+TABLE.shaded TD { background-color: gainsboro; padding: 5px; margin-top: 5px; border: solid white 1px}
+
+/* definition lists, e.g. blowfish and twofish product pages */
+DT { margin-top: .5em; }
+DD { margin-left: .75em; }
+DL DD { margin: 0 0 .5em .5em }
+            
+/* multicolumn, unbulleted lists */
+#content H1 + DIV.multicolumn-list-wrapper { padding-top: 1em; }
+#content DIV.multicolumn-list-wrapper {  overflow: auto; width: 100%; }
+#content UL.multicolumn { margin: 0; padding: 0; list-style-type: none; float: left}
+#content UL.multicolumn li {  margin: 0 0 0 1em; text-indent: -1em; padding-bottom: .2em; }
+#content UL.multicolumn.column1of3 li, UL.multicolumn.column2of3 li, #content UL.multicolumn.column1of2 li { padding-right: 1em; }
+#content UL.column1of3, #content UL.column2of3, #content UL.column3of3 { width: 33%; }
+#content UL.column1of2, #content UL.column2of2 { width: 50%; }
+
+/* order forms */
+DIV.orderform { border: 1px solid #aaaaaa; padding: 0 10px 12px; margin: 10px 0; background: #eeeeee; }
+DIV.orderform H3 { font-size: 120%; padding: 0; margin-bottom: 0;}
+DIV.orderform form { background: transparent; margin: 0; padding: 0}
+DIV.orderform table { background: transparent; border-spacing: 0; margin: 0; padding: 0; }
+DIV.orderform label, DIV.orderform .grouplabel { display: block; font-weight: bold; margin: 10px 0 1px; padding: 0;}
+DIV.orderform .hidden { position: absolute; left: -999em; }
+DIV.orderform input[type=text], DIV.orderform select { color: black; background-color: white;  border: 1px solid #999; }
+DIV.orderform form input[disabled], DIV.orderform form input.disabled { background-color: #ebebeb; color: #999; }
+DIV.orderform input.image { margin: 10px 0 0 2px; }
