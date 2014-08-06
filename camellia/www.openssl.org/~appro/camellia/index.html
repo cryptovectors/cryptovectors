@@ -1,0 +1,122 @@
+<HTML>
+<HEADER>
+<TITLE>Camellia assembler implementation.</TITLE>
+</HEADER>
+<BODY>
+<H1>Camellia assembler implementation.</H1>
+
+<HR>
+<P ALIGN="justify">As title suggests, this is <A
+HREF="camellia_asm.tar.gz">download</A> and instructional page for
+Camellia assembler implementation. The downloadable tar-ball was
+updated on 25th of January 2009. The update addresses minor problem
+in x86_64 <TT>Camellia_cbc_encrypt</TT> and Win64 exception handler.
+For background information about Camellia cipher see NTT site:
+
+<BLOCKQUOTE>
+<P>Intellectual Property information for Camellia: <A
+HREF="http://info.isl.ntt.co.jp/crypt/eng/info/chiteki.html">http://info.isl.ntt.co.jp/crypt/eng/info/chiteki.html</A><BR>
+
+<P>News Release for Announcement of Camellia open source: <A
+HREF="http://www.ntt.co.jp/news/news06e/0604/060413a.html">http://www.ntt.co.jp/news/news06e/0604/060413a.html</A>.
+</BLOCKQUOTE>
+
+<P ALIGN="justify">Back to assembler. Just like NTT's this implementation
+is licensed under multiple licenses and may be used under the terms of
+either the <A HREF="dist/GPL_license.txt">GNU General Public License
+version 2</A> or later, the <A HREF="dist/LGPL_license.txt">GNU Lesser
+General Public License version 2.1</A> or later, the <A
+HREF="dist/MPL_license.txt">Mozilla Public License version 1.1</A> or the
+<A HREF="dist/BSD_license.txt">BSD License</A>. Licensing terms apply to
+downloadable tar-ball as whole, as well as to specific modules generated
+by platform scripts. In OpenSSL context usage is effectively governed by
+the BSD License.
+
+<P ALIGN="justify">Currently only x86 and x86_64 implementations are
+provided. Assembler codes are binary compatible with NTT Camellia API
+version 1.2.0 and can be used as drop-in repacement for C compiler
+generated code. While being backward compatible this implementation
+modifies return value for <TT>Camellia_Ekeygen</TT> and adds three
+additional interfaces:
+
+<BLOCKQUOTE>
+<PRE>
+int  Camellia_Ekeygen(int keyBitLength,
+		      const unsigned char *rawKey,
+		      KEY_TABLE_TYPE keyTable);
+
+void Camellia_EncryptBlock_Rounds(int grandRounds,
+				  const unsigned char *plaintext,
+				  const KEY_TABLE_TYPE keyTable,
+				  unsigned char *ciphertext);
+void Camellia_DecryptBlock_Rounds(int grandRounds,
+				  const unsigned char *ciphertext,
+				  const KEY_TABLE_TYPE keyTable,
+				  unsigned char *plaintext);
+
+void Camellia_cbc_encrypt(const unsigned char *in,
+			  unsigned char *out,
+			  size_t length,
+			  const CAMELLIA_KEY *key,
+			  unsigned char *ivec,
+			  int enc);
+</PRE>
+</BLOCKQUOTE>
+
+<P ALIGN="justify">For more information about these modifications see
+accompanying <A HREF="dist/camellia.h">camellia.h</A>.
+
+<P ALIGN="justify">Deliverables are two sets of perl scripts that
+generate actual assembler code for a range of platforms. In order to
+generate particular code invoke relevant processor platform script and
+pass assembler flavor as argument, e.g.:
+
+<BLOCKQUOTE>
+<TT>perl x86/cmll-x86.pl elf &gt; cmll-x86.s</TT>
+</BLOCKQUOTE>
+<P>Supported assembler flavors for x86/cmll-x86.pl code are:
+
+<BLOCKQUOTE>
+<TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TD>elf		<TD>suitable for platforms using ELF executable format,
+		e.g. Linux, Solaris, contemporary *BSD.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>a.out	<TD>suitable for platforms using a.out executable
+		format, e.g. DJGPP, OpenBSD prior v3.4...</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>coff	<TD>suitable for Cygwin and MinGW.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>win32	<TD>suitable for Microsoft Macro Assembler, MASM,
+		version 8.0 or later.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>win32n	<TD>suitable for nasm -f win32.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>macosx	<TD>suitable for Mac OS X.</TR>
+</TABLE>
+</BLOCKQUOTE>
+
+<P>Supported assembler flavors for x86_64/cmll-x86_64.pl code are:
+
+<BLOCKQUOTE>
+<TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TD>elf		<TD>suitable for platforms using ELF executable format,
+		e.g. Linux, Solaris, *BSD.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>masm	<TD>suitable for Microsoft Macro Assembler (x64), ml64,
+		version 8.0.50727 and later.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>nasm	<TD>suitable for nasm -f win64, version 2.03 and
+		later.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>mingw64	<TD>suitable for MinGW64.</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>macosx	<TD>suitable for Mac OS X.</TR>
+</TABLE>
+</BLOCKQUOTE>
+
+<HR>
+<H5>January 2009, &lt;appro@openssl.org&gt;</H5>
+</BODY>
+</HTML>
